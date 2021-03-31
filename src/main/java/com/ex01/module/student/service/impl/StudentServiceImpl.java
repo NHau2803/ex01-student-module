@@ -34,15 +34,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentInformationModel add(StudentInformationCreateDTO request) {
+    public StudentInformationCreateDTO add(StudentInformationCreateDTO request) {
 
         StudentInformationModel studentInformationModel = new StudentInformationModel();
-        studentInformationModel.setName(request.getName());
         studentInformationModel.setCode(request.getCode());
+        studentInformationModel.setName(request.getName());
         studentInformationModel.setGender(
                 GenderType.toEnum(request.getGender())
         );
-
         try {
             studentInformationModel.setBirthday(
                     dateConverter.toTimestamp(request.getBirthday())
@@ -58,10 +57,11 @@ public class StudentServiceImpl implements StudentService {
         studentInformationModel.setCurrentAddress(request.getCurrentAddress());
         studentInformationModel.setHomeTown(request.getHomeTown());
 
+        System.out.println(studentInformationModel);
         studentInformationRepository.save(studentInformationModel);
         logger.info("StudentService: add success!");
 
-        return studentInformationModel;
+        return request;
     }
 
     @Override
@@ -83,10 +83,9 @@ public class StudentServiceImpl implements StudentService {
                     dateConverter.toTimestamp(request.getBirthday())
             );
         } catch (ParseException e) {
-            logger.error("StudentService: {} not found.", id);
+            logger.error("StudentService call DateConverter: {}",e);
             return null;
         }
-
         studentUpdate.setEmail(request.getEmail());
         studentUpdate.setPhone(request.getPhone());
         studentUpdate.setAvatar(request.getAvatar());

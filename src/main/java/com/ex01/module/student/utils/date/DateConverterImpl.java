@@ -23,9 +23,14 @@ public class DateConverterImpl implements DateConverter{
     }
 
     @Override
-    public long toTimestamp(String time) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = sdf.parse(time);
+    public long toTimestamp(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return date.getTime();
     }
 }
