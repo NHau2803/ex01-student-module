@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface StudentService {
-    Page<StudentInformationModel> search(int pageNo, int pageSize);
+    Page<StudentInformationModel> search(int pageStart, int pageSize);
     StudentInformationCreateDTO add(StudentInformationCreateDTO request);
     StudentInformationModel update(StudentInformationDTO request);
     boolean delete(String id);

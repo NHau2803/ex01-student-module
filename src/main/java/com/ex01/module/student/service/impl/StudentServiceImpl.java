@@ -28,9 +28,10 @@ public class StudentServiceImpl implements StudentService {
     private Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     @Override
-    public Page<StudentInformationModel> search(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return studentInformationRepository.findAll(pageable); // need extra!
+    public Page<StudentInformationModel> search(int pageStart, int pageSize) {
+        Pageable pageable = PageRequest.of(pageStart - 1, pageSize);
+        return studentInformationRepository.findAll(pageable);
+        // need extra!
     }
 
     @Override
